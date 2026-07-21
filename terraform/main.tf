@@ -3,14 +3,12 @@ provider "aws" {
 }
 
 resource "aws_instance" "devops_server" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
+  ami                    = var.ami_id
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.devops_key.key_name
+  vpc_security_group_ids = [aws_security_group.devops_sg.id]
 
   tags = {
     Name = "Stanphlux-DevOps-Server"
   }
-}
-
-output "server_public_ip" {
-  value = aws_instance.devops_server.public_ip
 }

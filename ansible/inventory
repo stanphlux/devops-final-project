@@ -1,0 +1,2 @@
+[webserver]
+3.94.90.232 ansible_user=ubuntu ansible_private_key_file=~/.ssh/stanphlux-devops-key
