@@ -1,22 +1,59 @@
-# Java
-java-app/target/
-*.jar
-
-# Docker
-*.log
-
+# =========================
 # Terraform
+# =========================
+
 terraform/.terraform/
 terraform/*.tfstate
 terraform/*.tfstate.*
+terraform/crash.log
+terraform/tfplan
 
-# Ansible
-*.retry
 
-# OS files
+# =========================
+# AWS Credentials
+# =========================
+
+.aws/
+.aws/credentials
+.aws/config
+
+
+# =========================
+# Java / Maven
+# =========================
+
+java-app/target/
+*.jar
+*.war
+*.class
+
+
+# =========================
+# Node / Frontend
+# =========================
+
+portfolio-app/node_modules/
+
+
+# =========================
+# IDE Files
+# =========================
+
+.vscode/
+.idea/
+*.iml
+
+
+# =========================
+# OS Files
+# =========================
+
 .DS_Store
 Thumbs.db
 
-# IDE
-.vscode/
-.idea/
+
+# =========================
+# Logs
+# =========================
+
+*.log
