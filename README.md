@@ -39,3 +39,35 @@ Start all services:
 
 ```bash
 docker compose up -d
+
+## Live Deployment
+
+Portfolio Website:
+http://3.94.90.232
+
+## Technologies Used
+
+- AWS EC2
+- Terraform
+- Ansible
+- Docker
+- Nginx
+- Spring Boot
+- Linux
+
+## Deployment Architecture
+
+User Browser
+      |
+      |
+AWS EC2 Instance
+      |
+      |
+Nginx Reverse Proxy
+      |
+      |
+Docker Containers
+      |
+      |---- Portfolio Website
+      |
+      |---- Spring Boot Application
