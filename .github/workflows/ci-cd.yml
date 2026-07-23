@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: DevOps CI Pipeline
 
 on:
   push:
@@ -10,65 +10,35 @@ on:
 
 jobs:
 
-  build-test:
-
+  build-java-app:
+    name: Build Java Application
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
+      - name: Build with Maven
+        working-directory: java-app
+        run: mvn clean package -DskipTests
 
-    # Build Portfolio Docker Image
-    - name: Build Portfolio Docker Image
-      run: |
-        docker build -t portfolio-app ./portfolio-app
-
-
-    # Build Java Application
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - name: Build Docker Image
+        run: docker build -t java-app ./java-app
 
 
-    - name: Build Java App with Maven
-      run: |
-        cd java-app
-        mvn clean package -DskipTests
-
-
-    # Build Java Docker Image
-    - name: Build Java Docker Image
-      run: |
-        docker build -t java-app ./java-app
-
-
-    # Docker Image Check
-    - name: Docker Images
-      run: |
-        docker images
-
-
-  deploy:
-
-    needs: build-test
-
+  build-portfolio:
+    name: Build Portfolio Docker Image
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-
-
-    - name: Deploy using Docker Compose
-      run: |
-        docker compose up -d
-
-
-    - name: Show Running Containers
-      run: |
-        docker ps
+      - name: Build Portfolio Image
+        run: docker build -t portfolio-app ./portfolio-app
